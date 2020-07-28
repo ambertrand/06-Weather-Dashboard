@@ -1,5 +1,9 @@
 $(document).ready(function() {
-    
+
+    $(".searchButton").on("click", function() {
+        // console.log("clicked");
+        
+    });
 })
 
 

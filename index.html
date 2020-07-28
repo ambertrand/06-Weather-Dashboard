@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Forecast Dashboard</title>
 
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="./Styles/style.css">
 </head>
@@ -20,16 +22,44 @@
         </div>
     </header>
 
-    <!-- <section class="container bg-light">
-        <div class="row">
-            <div class="col-md-4">
+    <main class="container-fluid">
+        <section class="row citySearch">
+            <div class="col-12 col-md-3 bg-light">
+                <label><strong>Search for a City:</strong></label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control"><button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="col-12 col-md-1"></div>
+            <div class="card col-12 col-md-8 mt-4">
+                <div class="card-body populateCityInfo">
+                    <h2 class="cityDate"><span class="currentWeather">Text Here</span></h2>
+                </div>
+                <img class="weatherIcon img-fluid" src="" alt="" />
+                <div class="currentTemp mb-2">
+                    Temperature: <span class="currentTempVal"></span>
+                </div>
+                <div class="currentHumidity mb-2">
+                    Humidity: <span class="currentHumidityVal"></span>
+                </div>
+                <div class="windSpeed mb-2">
+                    Wind Speed: <span class="currentWindVal"></span>
+                </div>
+                <div class="uvIndex mb-2">
+                    UV Index: <span class="currentUvValue"></span>
+                </div>
+            </div>
+            <!-- <div class="col-12 col-md-1"></div> -->
+        </section>
+
+        <section class="row">
+            <div class="col-12 col-md-8">
 
             </div>
-        </div>
-    </section> -->
+        </section>
+    </main>
 
-    
-   
+
     <footer>
         <div class="navbar fixed-bottom bg-white justify-content-center">
             <p><strong>Alex Bertrand | &copy; Copyright 2020</strong></p>
@@ -40,4 +70,5 @@
     <script src="./Styles/script.js"></script>
 
 </body>
+
 </html>

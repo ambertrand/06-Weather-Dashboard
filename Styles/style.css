@@ -3,8 +3,17 @@
     box-sizing: border-box;
 }
 
+h1 {
+    padding: 10px;
+}
+
 label {
     font-size: larger;
+}
+
+div.card {
+    margin-left: 20px;
+    border-radius: 10px;
 }
 
 .forecastCard {

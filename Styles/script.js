@@ -1,9 +1,21 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-    $(".searchButton").on("click", function() {
+    // API weather key
+    const weatherKey = "6c911f8e164e26c52b3af8b48bceac95"
+    
+    
+
+
+    $(".searchButton").on("click", function () {
         // console.log("clicked");
-        
+
     });
+
+    // $.ajax({
+    //     url: queryURL,
+    //     method: "GET"
+    // }).then(function (response)
+    
 })
 
 

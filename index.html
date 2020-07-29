@@ -30,9 +30,13 @@
             <div class="col-12 col-md-3 bg-light">
                 <label><strong>Search for a City:</strong></label>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control"><button class="btn btn-primary searchButton" type="button"><i
+                    <input type="text" class="cityInput" placeholder="City, State"><button class="btn btn-primary searchButton" type="button"><i
                             class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
+                <div class="card-body savedCity bg-white text-center mb-2"></div>
+                <div class="card-body savedCity bg-white text-center mb-2"></div>
+                <div class="card-body savedCity bg-white text-center mb-2"></div>
+                <div class="card-body savedCity bg-white text-center mb-2"></div>
             </div>
             <!-- <div class="col-12 col-md-1"></div> -->
             <div class="card col-12 col-md-8 mt-4">
@@ -57,14 +61,15 @@
 
         <!-- 5-Day Forecast header -->
         <div class="row forecastHeader mt-3">
-            <div class="col-12">
+            <div class="col-3"></div>
+            <div class="col-8">
                 <h3><strong>5-Day Forecast:</strong></h3>
             </div>
         </div>
 
         <!-- 5-Day Forecast card -->
         <div class="row forecastRow">
-            <!-- <div class="col-4"></div> -->
+            <div class="col-3"></div>
             <div class="card-body forecastCard col-sm-1 mx-1 mx-sm-3">
                 <h5 class="forecastDate">Date</h5>
                 <img class="forecastPic img-fluid" />

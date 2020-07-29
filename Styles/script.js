@@ -3,7 +3,7 @@ $(document).ready(function () {
     // API weather key
     const weatherKey = "6c911f8e164e26c52b3af8b48bceac95"
     
-    
+
 
 
     $(".searchButton").on("click", function () {
@@ -21,7 +21,8 @@ $(document).ready(function () {
 
 
 
-
+//Pseudo code
+// UV index: <3 -> green  3-5 -> yellow 6-7 -> orange  8-10 -> red 11+ ->violet
 
 
 

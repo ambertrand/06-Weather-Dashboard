@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     // API weather key
     const weatherKey = "6c911f8e164e26c52b3af8b48bceac95"
-    
+
     // Weather elements being hooked to
     const cityEl = document.querySelector(".cityInput");
     const dateEl = document.querySelector(".cityDate");
@@ -11,6 +11,8 @@ $(document).ready(function () {
     const humidityEl = document.querySelector(".currentHumidityVal");
     const windEl = document.querySelector(".currentWindVal");
     const uvIndexEl = document.querySelector(".currentUvVal")
+
+
 
     // function weatherAPI (city, state, country) {
     //     if (city && state && country) {
@@ -22,7 +24,7 @@ $(document).ready(function () {
     //     }
     //     console.log(weatherAPI);
     // }
-    
+
     // function uvIndexColor(uvi) {
     //     if (uvi < 3) {
     //         return "green";
@@ -35,31 +37,44 @@ $(document).ready(function () {
     //     }else return "purple"
     // }
 
-    // function weatherSearch (city, state, country) {
-    //     let queryURL = weatherAPI (city, state, country);
-    //     console.log(queryURL);
 
-    //     $.ajax({
-    //         url: queryURL,
-    //         method: "GET"
-    //     }).then(function (response) {
-    //     console.log(response);
-    //     });
-    // }
 
-    
 
-    
-    
-    
-    
+
+
+
+
+
+
     $(".searchButton").on("click", function () {
         // console.log("clicked");
-        
+
+        let city = $(".cityInput").val();
+        let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}`;
+
+
+        $.ajax({
+            url: weatherURL,
+            method: "GET"
+        })
+            .then(function (response) {
+                console.log(response);
+                let latitude = response.coord.lat;
+                let longitude = response.coord.lon;
+
+                let uvUrl = `https://api.openweathermap.org/data/2.5/uvi?appid=${weatherKey}&lat=${latitude}&lon=${longitude}`;
+
+                $.ajax({
+                    url: uvUrl,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response);
+                })
+            });
     });
 
- 
-    
+
+
 });
 
 

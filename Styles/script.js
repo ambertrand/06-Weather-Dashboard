@@ -63,10 +63,13 @@ $(document).ready(function () {
                     console.log(response);
                     let uv = response.current.uvi;
                     let uvIndex = uvColor(uv);
+                    let fiveDayWeather = response.daily
                     $(".currentUvVal").append(uv);
                     $(".currentUvVal").attr("style", `background-color: ${uvIndex}; color: ${uvIndex === "yellow" ? "black" : "white"}`);
                     
-                    
+                    for (let i = 0; i <= 5; i++) {
+                        
+                    }
                 })
                 
             });
@@ -74,7 +77,6 @@ $(document).ready(function () {
         // $(".populateCityInfo").show("display")
         // $(".forecastHeader").show("display")
     });
-
 });
 
 

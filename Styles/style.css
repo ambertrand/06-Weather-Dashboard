@@ -11,6 +11,10 @@ label {
     font-size: larger;
 }
 
+button.savedCity {
+    background-color: #ffffff;
+}
+
 div.card {
     margin-left: 20px;
     border-radius: 10px;

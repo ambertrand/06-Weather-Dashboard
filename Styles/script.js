@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $(".populateCityInfo").hide("none")
+    // $(".populateCityInfo").hide("none")
 
     // API weather key
     const weatherKey = "6c911f8e164e26c52b3af8b48bceac95"
@@ -34,7 +34,7 @@ $(document).ready(function () {
 
     $(".searchButton").on("click", function () {
         // console.log("clicked");
-        $(".populateCityInfo").show("display")
+        // $(".populateCityInfo").show("display")
 
         
         let city = $(".cityInput").val();
@@ -71,7 +71,7 @@ $(document).ready(function () {
                     method: "GET"
                 }).then(function (response) {
                     console.log(response);
-                    let uv = response.value
+                    let uv = Math.round(response.value);
                     $(".currentUvVal").append(uv);
                 })
                 

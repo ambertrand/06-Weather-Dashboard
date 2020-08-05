@@ -11,23 +11,13 @@ label {
     font-size: larger;
 }
 
-/* .savedCity {
-    display: none;
-} */
-
 div.card {
     margin-left: 20px;
     border-radius: 10px;
-    /* display: none; */
 }
-
-/* .forecastHeader {
-    display: none;
-} */
 
 .forecastCard {
     background-color: #008cff;
     border-radius: 10px;
     color: #ffffff;
-    /* display: none; */
 }

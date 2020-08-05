@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $(".populateCityInfo").hide("none")
 
     // API weather key
     const weatherKey = "6c911f8e164e26c52b3af8b48bceac95"
@@ -9,6 +10,7 @@ $(document).ready(function () {
 
 
     // function uvColor(uv) {
+    //     console.log(uv);
     //     if (uv < 3) {
     //         return "green";
     //     }else if (uv >= 3 && uv < 6) {
@@ -32,7 +34,9 @@ $(document).ready(function () {
 
     $(".searchButton").on("click", function () {
         // console.log("clicked");
+        $(".populateCityInfo").show("display")
 
+        
         let city = $(".cityInput").val();
         let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}`;
         // $(".cityDate").html(city);
@@ -72,7 +76,7 @@ $(document).ready(function () {
                 })
                 
             });
-            
+          
     });
 
 });

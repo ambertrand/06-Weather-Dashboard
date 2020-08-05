@@ -3,26 +3,19 @@ $(document).ready(function () {
     // API weather key
     const weatherKey = "6c911f8e164e26c52b3af8b48bceac95"
 
-    // Weather elements being hooked to
-    // const cityEl = document.querySelector(".cityInput");
-    // const dateEl = document.querySelector(".cityDate");
-    // const iconEl = document.querySelector(".weatherIcon");
-    // const tempEl = document.querySelector(".currentTempVal");
-    // const humidityEl = document.querySelector;
-    // const windEl = document.querySelector(".currentWindVal");
-    // const uvIndexEl = document.querySelector(".currentUvVal")
+    let todaysDate = moment().format('L')
 
 
 
 
-    // function uvColor(uvi) {
-    //     if (uvi < 3) {
+    // function uvColor(uv) {
+    //     if (uv < 3) {
     //         return "green";
-    //     }else if (uvi >= 3 && uvi < 6) {
+    //     }else if (uv >= 3 && uv < 6) {
     //         return "yellow";
-    //     }else if (uvi >= 6  && uvi < 8) {
+    //     }else if (uv >= 6  && uv < 8) {
     //         return "orange";
-    //     }else if (uvi >= 8 && uvi < 11) {
+    //     }else if (uv >= 8 && uv < 11) {
     //         return "red"
     //     }else return "purple"
     // }
@@ -30,6 +23,7 @@ $(document).ready(function () {
 
     
     
+
 
     
 
@@ -41,7 +35,8 @@ $(document).ready(function () {
 
         let city = $(".cityInput").val();
         let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}`;
-        $(".cityDate").html(city);
+        // $(".cityDate").html(city);
+        
 
         $.ajax({
             url: weatherURL,
@@ -49,6 +44,19 @@ $(document).ready(function () {
         })
             .then(function (response) {
                 console.log(response);
+                let cityName = response.name
+                let temperature = Math.round(((response.main.temp - 273.15) * 1.8 + 32));
+                let Icon = response.weather[0].icon
+                let humidity = response.main.humidity;
+                let windSpeed = response.wind.speed;
+                
+                $(".cityDate").append(`${cityName} (${todaysDate})`)
+                $(".currentTempVal").append(temperature);
+                $(".weatherIcon").attr("src", `http://openweathermap.org/img/wn/${Icon}.png`).attr("alt", response.weather[0].description);
+                $(".currentHumidityVal").append(humidity);
+                $(".currentWindVal").append(windSpeed);
+                
+
                 let latitude = response.coord.lat;
                 let longitude = response.coord.lon;
 
@@ -59,6 +67,8 @@ $(document).ready(function () {
                     method: "GET"
                 }).then(function (response) {
                     console.log(response);
+                    let uv = response.value
+                    $(".currentUvVal").append(uv);
                 })
                 
             });

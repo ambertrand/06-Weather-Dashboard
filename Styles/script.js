@@ -68,6 +68,7 @@ $(document).ready(function () {
                     $(".currentUvVal").attr("style", `background-color: ${uvIndex}; color: ${uvIndex === "yellow" ? "black" : "white"}`);
                     
                     for (let i = 0; i <= 5; i++) {
+                        let fiveDay = fiveDayWeather[i];
                         
                     }
                 })

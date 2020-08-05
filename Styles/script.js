@@ -1,5 +1,6 @@
 $(document).ready(function () {
     // $(".populateCityInfo").hide("none")
+    // $(".forecastHeader").hide("none")
 
     // API weather key
     const weatherKey = "6c911f8e164e26c52b3af8b48bceac95"
@@ -9,33 +10,21 @@ $(document).ready(function () {
 
 
 
-    // function uvColor(uv) {
-    //     console.log(uv);
-    //     if (uv < 3) {
-    //         return "green";
-    //     }else if (uv >= 3 && uv < 6) {
-    //         return "yellow";
-    //     }else if (uv >= 6  && uv < 8) {
-    //         return "orange";
-    //     }else if (uv >= 8 && uv < 11) {
-    //         return "red"
-    //     }else return "purple"
-    // }
-
-
-    
-    
-
-
-    
-
-
+    function uvColor(uv) {
+        if (uv < 3) {
+            return "green";
+        }else if (uv >= 3 && uv < 6) {
+            return "yellow";
+        }else if (uv >= 6  && uv < 8) {
+            return "orange";
+        }else if (uv >= 8 && uv < 11) {
+            return "red"
+        }else return "purple"
+    }
 
 
     $(".searchButton").on("click", function () {
         // console.log("clicked");
-        // $(".populateCityInfo").show("display")
-
         
         let city = $(".cityInput").val();
         let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}`;
@@ -64,19 +53,26 @@ $(document).ready(function () {
                 let latitude = response.coord.lat;
                 let longitude = response.coord.lon;
 
-                let uvUrl = `https://api.openweathermap.org/data/2.5/uvi?appid=${weatherKey}&lat=${latitude}&lon=${longitude}`;
+                let oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&
+                &appid=${weatherKey}`;
 
                 $.ajax({
-                    url: uvUrl,
+                    url: oneCallUrl,
                     method: "GET"
                 }).then(function (response) {
                     console.log(response);
-                    let uv = Math.round(response.value);
+                    let uv = response.current.uvi;
+                    let uvIndex = uvColor(uv);
                     $(".currentUvVal").append(uv);
+                    $(".currentUvVal").attr("style", `background-color: ${uvIndex}; color: ${uvIndex === "yellow" ? "black" : "white"}`);
+                    
+                    
                 })
                 
             });
-          
+      
+        // $(".populateCityInfo").show("display")
+        // $(".forecastHeader").show("display")
     });
 
 });
@@ -94,8 +90,6 @@ $(document).ready(function () {
 // GIVEN a weather dashboard with form inputs
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
-// WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
 // WHEN I view the UV index
 // THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
 // WHEN I view future weather conditions for that city

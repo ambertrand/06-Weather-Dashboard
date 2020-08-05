@@ -16,8 +16,14 @@ div.card {
     border-radius: 10px;
 }
 
+span.currentUvVal {
+    padding: 10px;
+    border-radius: 5px;
+}
+
 .forecastCard {
     background-color: #008cff;
     border-radius: 10px;
     color: #ffffff;
+    margin: 10px;
 }

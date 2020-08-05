@@ -4,28 +4,18 @@ $(document).ready(function () {
     const weatherKey = "6c911f8e164e26c52b3af8b48bceac95"
 
     // Weather elements being hooked to
-    const cityEl = document.querySelector(".cityInput");
-    const dateEl = document.querySelector(".cityDate");
-    const iconEl = document.querySelector(".weatherIcon");
-    const tempEl = document.querySelector(".currentTempVal");
-    const humidityEl = document.querySelector(".currentHumidityVal");
-    const windEl = document.querySelector(".currentWindVal");
-    const uvIndexEl = document.querySelector(".currentUvVal")
+    // const cityEl = document.querySelector(".cityInput");
+    // const dateEl = document.querySelector(".cityDate");
+    // const iconEl = document.querySelector(".weatherIcon");
+    // const tempEl = document.querySelector(".currentTempVal");
+    // const humidityEl = document.querySelector;
+    // const windEl = document.querySelector(".currentWindVal");
+    // const uvIndexEl = document.querySelector(".currentUvVal")
 
 
 
-    // function weatherAPI (city, state, country) {
-    //     if (city && state && country) {
-    //         return `api.openweathermap.org/data/2.5/weather?q=${city},${state},${country}&appid=${weatherKey}`
-    //     }else if (city && state) {
-    //         return `api.openweathermap.org/data/2.5/weather?q=${city},${state}&appid=${weatherKey}`
-    //     }else {
-    //         return `api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}`
-    //     }
-    //     console.log(weatherAPI);
-    // }
 
-    // function uvIndexColor(uvi) {
+    // function uvColor(uvi) {
     //     if (uvi < 3) {
     //         return "green";
     //     }else if (uvi >= 3 && uvi < 6) {
@@ -38,10 +28,10 @@ $(document).ready(function () {
     // }
 
 
+    
+    
 
-
-
-
+    
 
 
 
@@ -51,7 +41,7 @@ $(document).ready(function () {
 
         let city = $(".cityInput").val();
         let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}`;
-
+        $(".cityDate").html(city);
 
         $.ajax({
             url: weatherURL,
@@ -70,10 +60,10 @@ $(document).ready(function () {
                 }).then(function (response) {
                     console.log(response);
                 })
+                
             });
+            
     });
-
-
 
 });
 

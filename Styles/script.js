@@ -1,14 +1,30 @@
 $(document).ready(function () {
-    // $(".populateCityInfo").hide("none")
-    // $(".forecastHeader").hide("none")
+    // $(".populateCityInfo").hide("none");
+    // $(".forecastHeader").hide("none");
 
     // API weather key
-    const weatherKey = "6c911f8e164e26c52b3af8b48bceac95"
+    const weatherKey = "6c911f8e164e26c52b3af8b48bceac95";
 
-    let todaysDate = moment().format('L')
+    let todaysDate = moment().format('L');
+    let forecast = moment().format('l');
 
+    let city = "";
+    let storedList = $(".cityList")
 
+    function cityHistoryList(cityName) {
+        let cityArray = localStorage.getItem("cityName");
+        console.log(cityArray);
+        cityArray = JSON.parse(cityArray) || [];
+        cityArray.push(cityName);
+        localStorage.setItem("cityName", JSON.stringify(cityArray));
 
+        let buttonList = $("<div>").addClass('col-12')
+        let buttonItem = $("<button>").addClass('btn btn-link savedCity mb-2');
+        buttonList.append(buttonItem);
+        storedList.append(buttonList);
+        buttonItem.html(city);
+    }
+    
 
     function uvColor(uv) {
         if (uv < 3) {
@@ -26,11 +42,11 @@ $(document).ready(function () {
     $(".searchButton").on("click", function () {
         // console.log("clicked");
         
-        let city = $(".cityInput").val();
+        city = $(".cityInput").val();
         let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}`;
         // $(".cityDate").html(city);
         
-
+        cityHistoryList(city);
         $.ajax({
             url: weatherURL,
             method: "GET"
@@ -67,16 +83,17 @@ $(document).ready(function () {
                     $(".currentUvVal").append(uv);
                     $(".currentUvVal").attr("style", `background-color: ${uvIndex}; color: ${uvIndex === "yellow" ? "black" : "white"}`);
                     
-                    for (let i = 0; i <= 5; i++) {
-                        let fiveDay = fiveDayWeather[i];
-                        
-                    }
+                    // for (let i = 0; i <= 5; i++) {
+                    //     let fiveDay = fiveDayWeather[i + 1];
+                    //     console.log(fiveDay);
+                        // $(".forecastDate").append(forecast)
+                    // }
                 })
                 
             });
       
-        // $(".populateCityInfo").show("display")
-        // $(".forecastHeader").show("display")
+        // $(".populateCityInfo").show("display");
+        // $(".forecastHeader").show("display");
     });
 });
 

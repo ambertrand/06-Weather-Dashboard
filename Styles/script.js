@@ -9,8 +9,8 @@ $(document).ready(function () {
     let forecast = moment().format('l');
 
     let city = "";
-    let storedList = $(".cityList")
-    let searchBtn = $(".searchButton")
+    const storedList = $(".cityList")
+    const searchBtn = $(".searchButton")
 
     // Function to add the last 5 recently searched cities
     function cityHistoryList(cityName) {
@@ -87,7 +87,6 @@ $(document).ready(function () {
                     // for (let i = 0; i <= 5; i++) {
                     //     let fiveDay = fiveDayWeather[i + 1];
                     //     console.log(fiveDay);
-                        // $(".forecastDate").append(forecast)
                     // }
                 })
                 
@@ -105,8 +104,6 @@ $(document).ready(function () {
 // GIVEN a weather dashboard with form inputs
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
-// WHEN I view the UV index
-// THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
 // WHEN I view future weather conditions for that city
 // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
 // WHEN I click on a city in the search history

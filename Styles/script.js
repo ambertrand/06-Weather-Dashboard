@@ -10,7 +10,9 @@ $(document).ready(function () {
 
     let city = "";
     let storedList = $(".cityList")
+    let searchBtn = $(".searchButton")
 
+    // Function to add the last 5 recently searched cities
     function cityHistoryList(cityName) {
         let cityArray = localStorage.getItem("cityName");
         console.log(cityArray);
@@ -23,9 +25,9 @@ $(document).ready(function () {
         buttonList.append(buttonItem);
         storedList.append(buttonList);
         buttonItem.html(city);
-    }
+    };
     
-
+    // Function adds background color based on current UV Index number
     function uvColor(uv) {
         if (uv < 3) {
             return "green";
@@ -36,11 +38,10 @@ $(document).ready(function () {
         }else if (uv >= 8 && uv < 11) {
             return "red"
         }else return "purple"
-    }
+    };
 
-
-    $(".searchButton").on("click", function () {
-        // console.log("clicked");
+    // Event listener when search button is clicked after city is added to input
+    searchBtn.on("click", function () {
         
         city = $(".cityInput").val();
         let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}`;
@@ -59,11 +60,11 @@ $(document).ready(function () {
                 let humidity = response.main.humidity;
                 let windSpeed = response.wind.speed;
                 
-                $(".cityDate").append(`${cityName} (${todaysDate})`)
-                $(".currentTempVal").append(temperature);
+                $(".cityDate").html(`${cityName} (${todaysDate})`)
+                $(".currentTempVal").html(temperature);
                 $(".weatherIcon").attr("src", `http://openweathermap.org/img/wn/${Icon}.png`).attr("alt", response.weather[0].description);
-                $(".currentHumidityVal").append(humidity);
-                $(".currentWindVal").append(windSpeed);
+                $(".currentHumidityVal").html(humidity);
+                $(".currentWindVal").html(windSpeed);
                 
 
                 let latitude = response.coord.lat;
@@ -80,7 +81,7 @@ $(document).ready(function () {
                     let uv = response.current.uvi;
                     let uvIndex = uvColor(uv);
                     let fiveDayWeather = response.daily
-                    $(".currentUvVal").append(uv);
+                    $(".currentUvVal").html(uv);
                     $(".currentUvVal").attr("style", `background-color: ${uvIndex}; color: ${uvIndex === "yellow" ? "black" : "white"}`);
                     
                     // for (let i = 0; i <= 5; i++) {
@@ -96,12 +97,6 @@ $(document).ready(function () {
         // $(".forecastHeader").show("display");
     });
 });
-
-
-
-
-//Pseudo code
-// UV index: <3 -> green  3-5 -> yellow 6-7 -> orange  8-10 -> red 11+ ->violet
 
 
 

@@ -6,7 +6,6 @@ $(document).ready(function () {
     const weatherKey = "6c911f8e164e26c52b3af8b48bceac95";
 
     let todaysDate = moment().format('L');
-    let forecast = moment().format('l');
 
     let city = "";
     const storedList = $(".cityList")
@@ -84,10 +83,13 @@ $(document).ready(function () {
                     $(".currentUvVal").html(uv);
                     $(".currentUvVal").attr("style", `background-color: ${uvIndex}; color: ${uvIndex === "yellow" ? "black" : "white"}`);
                     
-                    // for (let i = 0; i <= 5; i++) {
-                    //     let fiveDay = fiveDayWeather[i + 1];
-                    //     console.log(fiveDay);
-                    // }
+                    for (let i = 1; i <= 5; i++) {
+                        let currentDay = fiveDayWeather[i]
+                        $(`div.day-${i} .forecastDate`).text(moment.unix(currentDay.dt).format('l'));
+                        $(`div.day-${i} .forecastPic`).attr('src', `http://openweathermap.org/img/wn/${currentDay.weather[0].icon}.png`).attr('alt', currentDay.weather[0].description);
+                        $(`div.day-${i} .tempValue`).text(Math.round((currentDay.temp.day - 273.15) * 1.8 + 32));
+                        $(`div.day-${i} .humidityValue`).text(currentDay.humidity);
+                    }
                 })
                 
             });

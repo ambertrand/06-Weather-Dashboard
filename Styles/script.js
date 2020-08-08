@@ -8,13 +8,37 @@ $(document).ready(function () {
     let todaysDate = moment().format('L');
 
     let city = "";
+    let cityName = "";
+    let Icon = "";
+    let temperature = "";
+    let humidity = "";
+    let windSpeed = "";
     const storedList = $(".cityList")
     const searchBtn = $(".searchButton")
+    const cityDateEl = $(".cityDate")
+    const currentTempEl = $(".currentTempVal")
+    const weatherIcon = $(".weatherIcon")
+    const currentHumidityEl = $(".currentHumidityVal")
+    const currentWindEl = $(".currentWindVal")
+
+    let cityInfo = [];
+    let cityObj = {};
+
+    function currentForecast () {
+        cityObj = {
+            cityName: city,
+            weatherIcon: Icon,
+            temp: temperature,
+            humidityVal: humidity,
+            windSpeedVal: windSpeed,
+        }
+    }
+
 
     // Function to add the last 5 recently searched cities
     function cityHistoryList(cityName) {
         let cityArray = localStorage.getItem("cityName");
-        console.log(cityArray);
+        // console.log(cityArray);
         cityArray = JSON.parse(cityArray) || [];
         cityArray.push(cityName);
         localStorage.setItem("cityName", JSON.stringify(cityArray));
@@ -45,25 +69,26 @@ $(document).ready(function () {
         city = $(".cityInput").val();
         let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}`;
         // $(".cityDate").html(city);
-        
+
+
         cityHistoryList(city);
         $.ajax({
             url: weatherURL,
             method: "GET"
         })
             .then(function (response) {
-                console.log(response);
-                let cityName = response.name
-                let temperature = Math.round(((response.main.temp - 273.15) * 1.8 + 32));
-                let Icon = response.weather[0].icon
-                let humidity = response.main.humidity;
-                let windSpeed = response.wind.speed;
+                // console.log(response);
+                cityName = response.name
+                temperature = Math.round(((response.main.temp - 273.15) * 1.8 + 32));
+                Icon = response.weather[0].icon
+                humidity = response.main.humidity;
+                windSpeed = response.wind.speed;
                 
-                $(".cityDate").html(`${cityName} (${todaysDate})`)
-                $(".currentTempVal").html(temperature);
-                $(".weatherIcon").attr("src", `http://openweathermap.org/img/wn/${Icon}.png`).attr("alt", response.weather[0].description);
-                $(".currentHumidityVal").html(humidity);
-                $(".currentWindVal").html(windSpeed);
+                cityDateEl.html(`${cityName} (${todaysDate})`)
+                currentTempEl.html(temperature);
+                weatherIcon.attr("src", `http://openweathermap.org/img/wn/${Icon}.png`).attr("alt", response.weather[0].description);
+                currentHumidityEl.html(humidity);
+                currentWindEl.html(windSpeed);
                 
 
                 let latitude = response.coord.lat;
@@ -76,14 +101,14 @@ $(document).ready(function () {
                     url: oneCallUrl,
                     method: "GET"
                 }).then(function (response) {
-                    console.log(response);
+                    // console.log(response);
                     let uv = response.current.uvi;
                     let uvIndex = uvColor(uv);
                     let fiveDayWeather = response.daily
                     $(".currentUvVal").html(uv);
                     $(".currentUvVal").attr("style", `background-color: ${uvIndex}; color: ${uvIndex === "yellow" ? "black" : "white"}`);
                     
-                    for (let i = 1; i <= 5; i++) {
+                    for (let i = 0; i <= 5; i++) {
                         let currentDay = fiveDayWeather[i]
                         $(`div.day-${i} .forecastDate`).text(moment.unix(currentDay.dt).format('l'));
                         $(`div.day-${i} .forecastPic`).attr('src', `http://openweathermap.org/img/wn/${currentDay.weather[0].icon}.png`).attr('alt', currentDay.weather[0].description);
@@ -96,6 +121,8 @@ $(document).ready(function () {
       
         // $(".populateCityInfo").show("display");
         // $(".forecastHeader").show("display");
+        currentForecast();
+        console.log(cityObj);
     });
 });
 
@@ -106,8 +133,6 @@ $(document).ready(function () {
 // GIVEN a weather dashboard with form inputs
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
 // WHEN I open the weather dashboard

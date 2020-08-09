@@ -13,6 +13,7 @@ $(document).ready(function () {
     let temperature = "";
     let humidity = "";
     let windSpeed = "";
+    let uvi = ""
     const storedList = $(".cityList")
     const searchBtn = $(".searchButton")
     const cityDateEl = $(".cityDate")
@@ -22,15 +23,16 @@ $(document).ready(function () {
     const currentWindEl = $(".currentWindVal")
 
     let cityInfo = [];
-    let cityObj = {};
+    let weatherObject = {};
 
     function currentForecast () {
-        cityObj = {
+        weatherObject = {
             cityName: city,
             weatherIcon: Icon,
             temp: temperature,
             humidityVal: humidity,
             windSpeedVal: windSpeed,
+            uvi: uv,
         }
     }
 
@@ -62,6 +64,13 @@ $(document).ready(function () {
             return "red"
         }else return "purple"
     };
+
+
+
+
+
+
+
 
     // Event listener when search button is clicked after city is added to input
     searchBtn.on("click", function () {
@@ -121,8 +130,6 @@ $(document).ready(function () {
       
         // $(".populateCityInfo").show("display");
         // $(".forecastHeader").show("display");
-        currentForecast();
-        console.log(cityObj);
     });
 });
 

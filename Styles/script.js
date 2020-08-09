@@ -89,6 +89,7 @@ $(document).ready(function () {
         buttonItem.html(city);
     };
 
+    // Pulls the city name from Local storage
     function getLocalStorage() {
         let cityList = [];
         cityList = JSON.parse(localStorage.getItem("cityName"));
@@ -122,7 +123,7 @@ $(document).ready(function () {
         } else return "purple"
     };
 
-
+    // This ajax call reloads weather when button is clicked or page is refreshed
     function apiReload() {
 
         let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}`;

@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    // $(".populateCityInfo").hide("none");
-    // $(".forecastHeader").hide("none");
+    $(".populateCityInfo").hide("none");
+    $(".forecastHeader").hide("none");
 
     // API weather key
     const weatherKey = "6c911f8e164e26c52b3af8b48bceac95";
@@ -13,30 +13,17 @@ $(document).ready(function () {
     const weatherIcon = $(".weatherIcon")
     const currentHumidityEl = $(".currentHumidityVal")
     const currentWindEl = $(".currentWindVal")
-    const clearHistory = $(".clearHistory")
 
     let todaysDate = moment().format('L');
-    let city = "";
     let cityName = "";
-    let Icon = "";
-    let temperature = "";
-    let humidity = "";
-    let windSpeed = "";
-    let uvi = "";
 
     getLocalStorage();
-
-    // Stores past city searches
-    // let cityInfo = [];
-
 
     // FUNCTIONS
     function ajax(response) {
 
         city = $(".cityInput").val();
         let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}`;
-        // $(".cityDate").html(city);
-
 
         cityHistoryList(city);
         $.ajax({
@@ -44,7 +31,6 @@ $(document).ready(function () {
             method: "GET"
         })
             .then(function (response) {
-                // console.log(response);
                 cityName = response.name
                 temperature = Math.round(((response.main.temp - 273.15) * 1.8 + 32));
                 Icon = response.weather[0].icon
@@ -68,7 +54,6 @@ $(document).ready(function () {
                     url: oneCallUrl,
                     method: "GET"
                 }).then(function (response) {
-                    // console.log(response);
                     let uv = response.current.uvi;
                     let uvIndex = uvColor(uv);
                     let fiveDayWeather = response.daily
@@ -86,14 +71,13 @@ $(document).ready(function () {
 
             });
 
-        // $(".populateCityInfo").show("display");
-        // $(".forecastHeader").show("display");
+        $(".populateCityInfo").show("display");
+        $(".forecastHeader").show("display");
     };
 
     // Function to add the last 5 recently searched cities
     function cityHistoryList(cityName) {
         let cityArray = localStorage.getItem("cityName");
-        // console.log(cityArray);
         cityArray = JSON.parse(cityArray) || [];
         cityArray.push(cityName);
         localStorage.setItem("cityName", JSON.stringify(cityArray));
@@ -118,13 +102,9 @@ $(document).ready(function () {
                 storedList.append(buttonList);
                 buttonItem.html(cityList[i]);
             } if (cityList[0]) {
-                cityName = cityList[cityList.length - 1];
+                city = cityList[cityList.length - 1];
                 apiReload();
                 cityDateEl.html(`${cityName} (${todaysDate})`);
-                // currentTempEl.html(temperature);
-                // weatherIcon.attr("src", `http://openweathermap.org/img/wn/${Icon}.png`).attr("alt", response.weather[0].description);
-                // currentHumidityEl.html(humidity);
-                // currentWindEl.html(windSpeed);
             }
         }
     }
@@ -146,7 +126,6 @@ $(document).ready(function () {
     function apiReload() {
 
         let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}`;
-        // $(".cityDate").html(city);
 
 
         $.ajax({
@@ -154,7 +133,6 @@ $(document).ready(function () {
             method: "GET"
         })
             .then(function (response) {
-                // console.log(response);
                 cityName = response.name
                 temperature = Math.round(((response.main.temp - 273.15) * 1.8 + 32));
                 Icon = response.weather[0].icon
@@ -178,7 +156,6 @@ $(document).ready(function () {
                     url: oneCallUrl,
                     method: "GET"
                 }).then(function (response) {
-                    // console.log(response);
                     let uv = response.current.uvi;
                     let uvIndex = uvColor(uv);
                     let fiveDayWeather = response.daily
@@ -195,28 +172,20 @@ $(document).ready(function () {
                 })
 
             });
+        $(".populateCityInfo").show("display");
+        $(".forecastHeader").show("display");
     }
 
     // Event Listeners
     searchBtn.on("click", function (event) {
         event.preventDefault();
-
         ajax();
     });
 
-    clearHistory.on("click", function () {
-        // console.log("clicked");
-        localStorage.clear();
-    });
+    $(".savedCity").on("click",function(event) {
+        event.preventDefault();
+        city = $(this).text();
+        apiReload();
+    })
 
 });
-
-
-
-// ## Acceptance Criteria
-
-// GIVEN a weather dashboard with form inputs
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
-// WHEN I open the weather dashboard
-// THEN I am presented with the last searched city forecast

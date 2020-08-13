@@ -19,7 +19,7 @@ Below are screenshots of the finished product.
 ![City search screenshot](https://user-images.githubusercontent.com/65721950/89738630-24e96f00-da48-11ea-97de-d0a6b7562e09.png)
 
 # License
-**MIT**
+MIT
 
 # Contact
 

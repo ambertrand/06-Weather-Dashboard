@@ -1,12 +1,12 @@
 # 06-Weather-Dashboard
 
-**Description:**
+# Description:
 The goal of this project was to create a weather dashboard that allows the user to search for a city's weather and have the current weather as well as a 5 day forecast populate on the screen.  When the page is refreshed the most recent searched city's weather is re-populated on the page.
 
 
-#Deployed Web App: [Alex's Weather Dashboard](https://ambertrand.github.io/06-Weather-Dashboard/)
+# Deployed Web App: [Alex's Weather Dashboard](https://ambertrand.github.io/06-Weather-Dashboard/)
 
-#Developer Notes:
+# Developer Notes:
 For this project I was tasked with developing a weather dashboard that could search for a citys current and 5-day weather.  When the search button was clicked the city was saved to the recent searches field.
 
 For this project I started by building out the way I wanted the dashboard to look in HTML.  I was able to get a good base look then transferring to the Javascript.  I was able to get most of the Javascript working except when it came to the local storage.  This required meeting with classmates and talking through some issues that eventually allowed my app to work properly.

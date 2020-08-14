@@ -8,6 +8,13 @@ The goal of this project was to create a weather dashboard that allows the user 
 ## Deployed Web App: 
 [Alex's Weather Dashboard](https://ambertrand.github.io/06-Weather-Dashboard/)
 
+## Technologies Used
+    * Basic: HTML, CSS, Javascript
+    * Bootstrap
+    * JQuery
+    * Momentjs
+    * OpenWeather API
+
 ## Developer Notes:
 For this project I was tasked with developing a weather dashboard that could search for a citys current and 5-day weather.  When the search button was clicked the city was saved to the recent searches field.
 
